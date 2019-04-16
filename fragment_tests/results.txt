@@ -1,0 +1,408 @@
+Boot Loader SE Version 4.8.4 (Build ID: 5345,50697, Build Date: 2019-01-24_15:40:28)
+SDK Version: 484.001
+Copyright(C) 2019 Sony Computer Entertainment Inc.All Rights Reserved.
+[INFO]: === eXtreme Data Rate Memory Subsystem ===
+[INFO]: (Configured Memory Size per single XIO channel: 256 MBytes.)
+[INFO]: XIO channel[0] is available.
+[INFO]: XIO channel[1] is available.
+[INFO]: ---> Total 512 MBytes are now in use.
+[INFO]: SPU enable [0, 1, 2, 5, 6, 7] 11111111
+[INFO]: BE:3.1, SB:DX3.2
+Cell OS SDK4.8.4 001 (release build: r50697 20190124_154728)
+Copyright 2019 Sony Computer Entertainment Inc.
+revision: 50692
+date:     Thu Jan 24 15:47:28 JST 2019
+storage: ACL check will be skipped for device id ffffffffffffffff
+storage: ACL check will be skipped for device id 0
+storage: ACL check will be skipped for device id 1
+SYSTEM_SHUTDOWN
+SYSTEM_BOOT
+SDK v4.8.4
+CP v1.3.3
+lv2(0): total memory size: 502MB
+lv2(0): kern memory size:   18MB (heap:4160KB  page pool:9216KB)
+lv2(0): user memory size:  468MB
+lv2(2):
+lv2(2): Cell OS Lv-2 32 bit version 4.8.4
+lv2(2): Copyright 2011 Sony Computer Entertainment Inc.
+lv2(2): All Rights Reserved.
+lv2(2):
+lv2(2): revision: 50697
+lv2(2): build date: 2019/01/24 15:58:49
+lv2(2): processor: Broadband Engine  Ver 0x0000  Rev 0x0201
+lv2(2): PPU:0, Thread:0 is enabled.
+lv2(2): PPU:0, Thread:1 is enabled.
+lv2(2):
+lv2(2): mounting HOSTFS in default mount point "/app_home" : OK
+lv2(2): mounting HOSTFS in default mount point "/host_root" : OK
+rsx:      b01 500/650 vpe:ff shd:3f  [G1A849500:1:2:13:9:d:3:9:2][16:3:0:0:1:2:1][0:0:0]
+lv2(2): Available physical SPUs: 6/7
+lv2(2): mounting the flash file system : OK
+lv2(2): creating the initial system process : OK
+lv2(2): CP is available.
+lv2(2): system software: debugger mode (memsize=200MB)
+lv2(2): cellFsUtilMount(blk_dev='CELL_FS_IOS:BUILTIN_FLASH', fs='CELL_FS_FAT', mount='/dev_flash',
+ unk=0, ro=0, unk2=0, argv=8000000010098d90, argc=0)
+lv2(2): Could not find file '/app_home/boot_plugins_devflash.txt'.
+lv2(2): cellFsUtilMount(blk_dev='CELL_FS_IOS:BUILTIN_FLASH', fs='CELL_FS_FAT', mount='/dev_flash',
+ unk=0, ro=1, unk2=0, argv=8000000010098d90, argc=0)
+lv2(2): creating the system software process : OK
+lv2(2): cellFsUtilMount(blk_dev='CELL_FS_IOS:BUILTIN_FLSH2', fs='CELL_FS_SIMPLEFS', mount='/dev_fl
+ash2', unk=0, ro=0, unk2=0, argv=8000000010005d90, argc=0)
+lv2(2): cellFsUtilMount(blk_dev='CELL_FS_IOS:BUILTIN_FLASH', fs='CELL_FS_FAT', mount='/dev_flash2'
+, unk=0, ro=0, unk2=0, argv=8000000010005d90, argc=0)
+lv2(2): cellFsUtilMount(blk_dev='CELL_FS_IOS:BUILTIN_FLASH', fs='CELL_FS_FAT', mount='/dev_flash3'
+, unk=0, ro=0, unk2=0, argv=8000000010005d90, argc=0)
+checking hard disk: ............................................storage: ACL check will be skipped
+ for device id 2
+..storage: ACL check will be skipped for device id 3
+.storage: ACL check will be skipped for device id 4
+...lv2(2): BDemulator: enabled with invalid configuration
+.done. (# of partition = 2)
+lv2(2): cellFsUtilMount(blk_dev='CELL_FS_UTILITY:HDD0', fs='CELL_FS_SIMPLEFS', mount='/dev_hdd0',
+unk=0, ro=0, unk2=0, argv=800000001014bd90, argc=0)
+lv2(2): cellFsUtilMount(blk_dev='CELL_FS_UTILITY:HDD0', fs='CELL_FS_SIMPLEFS', mount='/dev_hdd0',
+unk=0, ro=0, unk2=0, argv=800000001014bd90, argc=0)
+lv2(2): cellFsUtilMount(blk_dev='CELL_FS_IOS:PATA1_HDD_DRIVE', fs='CELL_FS_UFS', mount='/dev_hdd0'
+, unk=0, ro=0, unk2=0, argv=800000001014bd90, argc=0)
+lv2(2): Could not find file '/dev_hdd0/boot_plugins_kernel.txt'.
+lv2(2): mounting HDD in the mount point "/dev_hdd0" : OK
+Could not find file '/app_home/boot_plugins_hdd0.txt'.
+Fake Hdd Access Speed = 0
+lv2(2): cellFsUtilMount(blk_dev='CELL_FS_IOS:PATA1_HDD_DRIVE', fs='CELL_FS_FAT', mount='/dev_hdd1'
+, unk=0, ro=0, unk2=0, argv=800000001014bd90, argc=0)
+lv2(2): sys_init: system software process set-up done.
+lv2(2): creating the debug agent : OK
+lv2(2): initial system process done.
+===== Start agent =====
+Debug Agent Version 4.8.4 (62) (Built - Jan 24 2019 16:40:19)
+Debug Agent Version: 4.8.4 (62)
+Reset parameter:  0x0000000000000000 - Reset the hardware gracefully (lv1 + lv2 soft reset)
+Boot parameter:   0x0000000000000012 - Debug mode
+	Memory size: 192MB (Console mode)
+	BD drive: Emulator
+	BD emulator speed: HDD/USB native
+	BD emulator device: HDD
+	File serving port: Dev Lan
+	Network interface: Single
+	Controllers auto-recognition: Disabled
+System parameter: 0x0001000000000000
+	Model: PS3 60GB HDD
+	Rel. check mode: Development
+Boot parameter:   0x0000000000000012 - Debug mode
+	Memory size: 192MB (Console mode)
+	BD drive: Emulator
+	BD emulator speed: HDD/USB native
+	BD emulator device: HDD
+	File serving port: Dev Lan
+	Network interface: Single
+	Controllers auto-recognition: Disabled
+System parameter: 0x0001000000000000
+	Model: PS3 60GB HDD
+	Rel. check mode: Development
+lv2(2):
+lv2(2): Prepare to shutdown closeProcessAll: internal Close failed[0x8001002a], fs[0x800000000051c
+f20], id_for_instance[0x39]
+lv2(2): .......
+lv2(2): Going to shutdown.
+SYSTEM_SHUTDOWN
+SYSTEM_SHUTDOWN
+Boot Loader SE Version 4.8.4 (Build ID: 5345,50697, Build Date: 2019-01-24_15:40:28)
+SDK Version: 484.001
+Copyright(C) 2019 Sony Computer Entertainment Inc.All Rights Reserved.
+[INFO]: === eXtreme Data Rate Memory Subsystem ===
+[INFO]: (Configured Memory Size per single XIO channel: 256 MBytes.)
+[INFO]: XIO channel[0] is available.
+[INFO]: XIO channel[1] is available.
+[INFO]: ---> Total 512 MBytes are now in use.
+[INFO]: SPU enable [0, 1, 2, 5, 6, 7] 11111111
+[INFO]: BE:3.1, SB:DX3.2
+SYSTEM_SHUTDOWN
+Cell OS SDK4.8.4 001 (release build: r50697 20190124_154728)
+Copyright 2019 Sony Computer Entertainment Inc.
+revision: 50692
+date:     Thu Jan 24 15:47:28 JST 2019
+storage: ACL check will be skipped for device id ffffffffffffffff
+storage: ACL check will be skipped for device id 0
+storage: ACL check will be skipped for device id 1
+storage: ACL check will be skipped for device id 2
+storage: ACL check will be skipped for device id 3
+storage: ACL check will be skipped for device id 4
+SYSTEM_BOOT
+SDK v4.8.4
+CP v1.3.3
+lv2(0): total memory size: 502MB
+lv2(0): kern memory size:   18MB (heap:4160KB  page pool:9216KB)
+lv2(0): user memory size:  468MB
+lv2(2):
+lv2(2): Cell OS Lv-2 32 bit version 4.8.4
+lv2(2): Copyright 2011 Sony Computer Entertainment Inc.
+lv2(2): All Rights Reserved.
+lv2(2):
+lv2(2): revision: 50697
+lv2(2): build date: 2019/01/24 15:58:49
+lv2(2): processor: Broadband Engine  Ver 0x0000  Rev 0x0201
+lv2(2): PPU:0, Thread:0 is enabled.
+lv2(2): PPU:0, Thread:1 is enabled.
+lv2(2):
+lv2(2): mounting HOSTFS in default mount point "/app_home" : OK
+lv2(2): mounting HOSTFS in default mount point "/host_root" : OK
+rsx:      b01 500/650 vpe:ff shd:3f  [G1A849500:1:2:13:9:d:3:9:2][16:3:0:0:1:2:1][0:0:0]
+lv2(2): Available physical SPUs: 6/7
+lv2(2): mounting the flash file system : OK
+lv2(2): creating the initial system process : OK
+lv2(2): CP is available.
+lv2(2): system software: debugger mode (memsize=200MB)
+lv2(2): cellFsUtilMount(blk_dev='CELL_FS_IOS:BUILTIN_FLASH', fs='CELL_FS_FAT', mount='/dev_flash',
+ unk=0, ro=0, unk2=0, argv=800000001009cd90, argc=0)
+lv2(2): Could not find file '/app_home/boot_plugins_devflash.txt'.
+lv2(2): cellFsUtilMount(blk_dev='CELL_FS_IOS:BUILTIN_FLASH', fs='CELL_FS_FAT', mount='/dev_flash',
+ unk=0, ro=1, unk2=0, argv=800000001009cd90, argc=0)
+lv2(2): creating the system software process : OK
+lv2(2): cellFsUtilMount(blk_dev='CELL_FS_IOS:BUILTIN_FLSH2', fs='CELL_FS_SIMPLEFS', mount='/dev_fl
+ash2', unk=0, ro=0, unk2=0, argv=8000000010005d90, argc=0)
+lv2(2): cellFsUtilMount(blk_dev='CELL_FS_IOS:BUILTIN_FLASH', fs='CELL_FS_FAT', mount='/dev_flash2'
+, unk=0, ro=0, unk2=0, argv=8000000010005d90, argc=0)
+lv2(2): cellFsUtilMount(blk_dev='CELL_FS_IOS:BUILTIN_FLASH', fs='CELL_FS_FAT', mount='/dev_flash3'
+, unk=0, ro=0, unk2=0, argv=8000000010005d90, argc=0)
+checking hard disk: ...lv2(2): BDemulator: enabled with invalid configuration
+...........lv2(2): cellFsUtilMount(blk_dev='CELL_FS_UTILITY:HDD0', fs='CELL_FS_SIMPLEFS', mount='/
+dev_hdd0', unk=0, ro=0, unk2=0, argv=800000001014fd90, argc=0)
+lv2(2): cellFsUtilMount(blk_dev='CELL_FS_UTILITY:HDD0', fs='CELL_FS_SIMPLEFS', mount='/dev_hdd0',
+unk=0, ro=0, unk2=0, argv=800000001014fd90, argc=0)
+lv2(2): cellFsUtilMount(blk_dev='CELL_FS_IOS:PATA1_HDD_DRIVE', fs='CELL_FS_UFS', mount='/dev_hdd0'
+, unk=0, ro=0, unk2=0, argv=800000001014fd90, argc=0)
+lv2(2): Could not find file '/dev_hdd0/boot_plugins_kernel.txt'.
+lv2(2): Could not find file '/app_home/boot_plugins_hdd0.txt'.
+...done. (# of partition = 2)
+mounting HDD in the mount point "/dev_hdd0" : OK
+PS3SETTINGS.SFT: [Network.eth2] setting can be adjusted only when [Network Settings for Debug] is
+set to [Dual Settings].
+Fake Hdd Access Speed = 0
+lv2(2): cellFsUtilMount(blk_dev='CELL_FS_IOS:PATA1_HDD_DRIVE', fs='CELL_FS_FAT', mount='/dev_hdd1'
+, unk=0, ro=0, unk2=0, argv=800000001014fd90, argc=0)
+lv2(2): sys_init: system software process set-up done.
+lv2(2): creating the debug agent : OK
+lv2(2): initial system process done.
+===== Start agent =====
+Debug Agent Version 4.8.4 (62) (Built - Jan 24 2019 16:40:19)
+Debug Agent Version: 4.8.4 (62)
+Reset parameter:  0x0000000000000000 - Reset the hardware gracefully (lv1 + lv2 soft reset)
+Boot parameter:   0x0000000000000012 - Debug mode
+	Memory size: 192MB (Console mode)
+	BD drive: Emulator
+	BD emulator speed: HDD/USB native
+	BD emulator device: HDD
+	File serving port: Dev Lan
+	Network interface: Single
+	Controllers auto-recognition: Disabled
+System parameter: 0x0001000000000000
+	Model: PS3 60GB HDD
+	Rel. check mode: Development
+SDK v4.8.4
+CP v1.3.3
+Debug Agent Version: 4.8.4 (62)
+[TM] Load: /app_home/C:\Users\rpcs3\Desktop\kd\fp\instructions\fragment_tests.self
+Video bringup begins
+Video bringup finished: color_buffer[0] = 0xCEAEFFC0, color_buffer[1] = 0xCDCDFF80
+Debug: offset[0] = 0xEAEFFC0, offset[1] = 0xDCDFF80
+Debug: Allocating fragment program memory.
+Debug: Loading vertex array data...done.
+Generating instruction NRM
+Debug: Loading fragment program 0x0xd0010af0, 48 bytes:
+FP word: 0xe803900
+FP word: 0xc802001d
+FP word: 0x0
+FP word: 0x0
+FP word: 0x0
+FP word: 0x0
+FP word: 0x0
+FP word: 0x0
+FP word: 0x10000
+FP word: 0x0
+FP word: 0x0
+FP word: 0x0
+done.
+The GPU wrote [0x7fffffff, 0x7fffffff, 0x7fffffff, 0x0] to memory
+Generating instruction RCP
+Debug: Loading fragment program 0x0xd0010af0, 48 bytes:
+FP word: 0xe801a00
+FP word: 0xc802001d
+FP word: 0x0
+FP word: 0x0
+FP word: 0x0
+FP word: 0x0
+FP word: 0x0
+FP word: 0x0
+FP word: 0x10000
+FP word: 0x0
+FP word: 0x0
+FP word: 0x0
+done.
+The GPU wrote [0x7f800000, 0x7f800000, 0x7f800000, 0x0] to memory
+Generating instruction RSQ
+Debug: Loading fragment program 0x0xd0010af0, 48 bytes:
+FP word: 0xe801b00
+FP word: 0xc802001d
+FP word: 0x0
+FP word: 0x0
+FP word: 0x0
+FP word: 0x0
+FP word: 0x0
+FP word: 0x0
+FP word: 0x10000
+FP word: 0x0
+FP word: 0x0
+FP word: 0x0
+done.
+The GPU wrote [0x7f800000, 0x7f800000, 0x7f800000, 0x0] to memory
+Generating instruction EX2
+Debug: Loading fragment program 0x0xd0010af0, 48 bytes:
+FP word: 0xe801c00
+FP word: 0xc802001d
+FP word: 0x0
+FP word: 0x0
+FP word: 0x0
+FP word: 0x0
+FP word: 0x0
+FP word: 0x0
+FP word: 0x10000
+FP word: 0x0
+FP word: 0x0
+FP word: 0x0
+done.
+The GPU wrote [0x3f800000, 0x3f800000, 0x3f800000, 0x0] to memory
+Generating instruction LG2
+Debug: Loading fragment program 0x0xd0010af0, 48 bytes:
+FP word: 0xe801d00
+FP word: 0xc802001d
+FP word: 0x0
+FP word: 0x0
+FP word: 0x0
+FP word: 0x0
+FP word: 0x0
+FP word: 0x0
+FP word: 0x10000
+FP word: 0x0
+FP word: 0x0
+FP word: 0x0
+done.
+The GPU wrote [0xff800000, 0xff800000, 0xff800000, 0x0] to memory
+Generating instruction EX2
+Debug: Loading fragment program 0x0xd0010af0, 48 bytes:
+FP word: 0xe803a00
+FP word: 0xc802001d
+FP word: 0x0
+FP word: 0x0
+FP word: 0x0
+FP word: 0x0
+FP word: 0x0
+FP word: 0x0
+FP word: 0x10000
+FP word: 0x0
+FP word: 0x0
+FP word: 0x0
+done.
+The GPU wrote [0x7fffffff, 0x7fffffff, 0x7fffffff, 0x0] to memory
+Generating instruction LG2
+Debug: Loading fragment program 0x0xd0010af0, 48 bytes:
+FP word: 0xe803b00
+FP word: 0xc802001d
+FP word: 0x0
+FP word: 0x0
+FP word: 0x0
+FP word: 0x0
+FP word: 0x0
+FP word: 0x0
+FP word: 0x10000
+FP word: 0x0
+FP word: 0x0
+FP word: 0x0
+done.
+The GPU wrote [0x0, 0x0, 0x0, 0x0] to memory
+Executing DIV with alternating XY passes
+Generating instruction DIV (0, 1, 0, 0)
+Debug: Loading fragment program 0x0xd0010af0, 48 bytes:
+FP word: 0xe803a00
+FP word: 0xc802001d
+FP word: 0x0
+FP word: 0x0
+FP word: 0x0
+FP word: 0x3f80
+FP word: 0x0
+FP word: 0x0
+FP word: 0x10000
+FP word: 0x0
+FP word: 0x0
+FP word: 0x0
+done.
+The GPU wrote [0x7fffffff, 0x7f800000, 0x7fffffff, 0x0] to memory
+Generating instruction DIVSQ (0, 1, 0, 0)
+Debug: Loading fragment program 0x0xd0010af0, 48 bytes:
+FP word: 0xe803b00
+FP word: 0xc802001d
+FP word: 0x0
+FP word: 0x0
+FP word: 0x0
+FP word: 0x3f80
+FP word: 0x0
+FP word: 0x0
+FP word: 0x10000
+FP word: 0x0
+FP word: 0x0
+FP word: 0x0
+done.
+The GPU wrote [0x0, 0x7f800000, 0x0, 0x0] to memory
+Generating instruction DIV (1, 0, 0, 0)
+Debug: Loading fragment program 0x0xd0010af0, 48 bytes:
+FP word: 0xe803a00
+FP word: 0xc802001d
+FP word: 0x0
+FP word: 0x0
+FP word: 0x3f80
+FP word: 0x0
+FP word: 0x0
+FP word: 0x0
+FP word: 0x10000
+FP word: 0x0
+FP word: 0x0
+FP word: 0x0
+done.
+The GPU wrote [0x7f800000, 0x7fffffff, 0x7fffffff, 0x0] to memory
+Generating instruction DIVSQ (1, 0, 0, 0)
+Debug: Loading fragment program 0x0xd0010af0, 48 bytes:
+FP word: 0xe803b00
+FP word: 0xc802001d
+FP word: 0x0
+FP word: 0x0
+FP word: 0x3f80
+FP word: 0x0
+FP word: 0x0
+FP word: 0x0
+FP word: 0x10000
+FP word: 0x0
+FP word: 0x0
+FP word: 0x0
+done.
+The GPU wrote [0x7f800000, 0x0, 0x0, 0x0] to memory
+Generating instruction MUL (0 * NaN)
+Debug: Loading fragment program 0x0xd0010af0, 48 bytes:
+FP word: 0xe800200
+FP word: 0xc802001d
+FP word: 0x0
+FP word: 0x0
+FP word: 0xffff7fff
+FP word: 0x0
+FP word: 0x0
+FP word: 0x0
+FP word: 0x10000
+FP word: 0x0
+FP word: 0x0
+FP word: 0x0
+done.
+The GPU wrote [0x7fffffff, 0x0, 0x0, 0x0] to memory
+lv2(2): cellFsUtilMount(blk_dev='CELL_FS_IOS:USB_MASS_STORAGE000', fs='CELL_FS_FAT', mount='/dev_u
+sb000', unk=0, ro=0, unk2=0, argv=8000000010107d90, argc=0)
+lv2(2): [system utility]: Mounting BDVD failed, code: 0x80010038.
+lv2(2): [system utility]: Unknown media, code: 0xff71.
+xAutoMounter::Mount failled -2147418056

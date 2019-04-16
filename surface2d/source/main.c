@@ -15,6 +15,22 @@
 #define CB_SIZE           (1 * 0x100000)
 #define HOST_SIZE         (32 * 0x100000)
 
+#define RSX_CONTEXT_CURRENTP					(g_context->current)
+
+#define RSX_CONTEXT_CURRENT_BEGIN(count)\
+if ((g_context->current + (count)) > g_context->end)\
+{ \
+	if (rsxContextCallback(g_context, (count)) != 0)\
+	{\
+		tty_write("Debug: RIP\n");\
+		return;\
+	}\
+} \
+
+#define RSX_CONTEXT_CURRENT_END(x)				g_context->current += (x)
+#define RSX_METHOD_COUNT_SHIFT					(18)
+#define RSX_METHOD(method, count)				(((count) << RSX_METHOD_COUNT_SHIFT) | (method))
+
 gcmContextData *g_context = NULL;
 u8 g_running = 1;
 
@@ -157,81 +173,6 @@ void rtt_setup(u32 index, u32 format)
 	rsxSetSurface(g_context, &surface_info);
 }
 
-void render_scene()
-{
-	rsxSetColorMask(g_context, GCM_COLOR_MASK_B | GCM_COLOR_MASK_G | GCM_COLOR_MASK_R | GCM_COLOR_MASK_A);
-	rsxZControl(g_context, 0, 1, 1);
-	rsxSetClearColor(g_context, 0);
-	rsxSetClearDepthValue(g_context, 0xffffffff);
-	rsxSetDepthTestEnable(g_context, GCM_TRUE);
-	rsxSetDepthFunc(g_context, GCM_LESS);
-	rsxSetShadeModel(g_context, GCM_SHADE_MODEL_SMOOTH);
-	rsxSetDepthWriteEnable(g_context, GCM_TRUE);
-	rsxSetFrontFace(g_context, GCM_FRONTFACE_CCW);
-	
-	rsxClearSurface(g_context, GCM_CLEAR_R | GCM_CLEAR_G | GCM_CLEAR_B | GCM_CLEAR_A | GCM_CLEAR_S | GCM_CLEAR_Z);
-	
-	//Draw stuff
-}
-
-void do_g8b8_test()
-{
-	if (g_current_buffer > 2)
-		return;
-	
-	color_buffer[g_current_buffer][0] = 0xAAFF;
-	rsxSetClearColor(g_context, 0);
-	rsxSetClearDepthValue(g_context,0xffffffff);
-	rsxClearSurface(g_context, GCM_CLEAR_G | GCM_CLEAR_S | GCM_CLEAR_Z);
-	
-	flush_queue();
-	wait_for_idle();
-	
-	tty_write("Removed color channel G...\n");
-	tty_write("Reading sample at maddr=0x%X\n", color_buffer[g_current_buffer]);
-	tty_write("Sample result was 0x%x\n", color_buffer[g_current_buffer][0]);
-
-	g_running = false;
-}
-
-void do_rgba16f_test()
-{
-	if (g_current_buffer > 2)
-		return;
-	
-	color_buffer[g_current_buffer][0] = 0xAAFF;
-	rsxSetClearColor(g_context, 0);
-	rsxSetClearDepthValue(g_context,0xffffffff);
-	rsxClearSurface(g_context, GCM_CLEAR_B | GCM_CLEAR_G | GCM_CLEAR_R | GCM_CLEAR_A | GCM_CLEAR_S | GCM_CLEAR_Z);
-	
-	flush_queue();
-	wait_for_idle();
-	
-	tty_write("Removed color channel G...\n");
-	tty_write("Reading sample at maddr=0x%X\n", color_buffer[g_current_buffer]);
-	tty_write("Sample result was 0x%x\n", color_buffer[g_current_buffer][0]);
-
-	g_running = false;
-}
-
-void do_z24s8_test()
-{
-	if (g_current_buffer > 2)
-		return;
-	
-	rsxSetClearDepthValue(g_context,0xaabbccdd);
-	rsxClearSurface(g_context, GCM_CLEAR_S | GCM_CLEAR_Z);
-	
-	flush_queue();
-	wait_for_idle();
-	
-	tty_write("Testing Z24S8 sample...\n");
-	tty_write("Reading sample at maddr=0x%X\n", depth_buffer[0]);
-	tty_write("Sample result was 0x%x\n", depth_buffer[0][0]);
-
-	g_running = false;
-}
-
 void flip()
 {
 	if (g_current_buffer < 2)
@@ -274,6 +215,88 @@ void sysutil_exit_callback(u64 status, u64 param, void *userdata)
 	}
 }
 
+void write_inline(void* block, u32 block_offset, u32 X, u32 Y, u32 Sz, u32 format)
+{
+	memset(block, 0, 4096);
+	u32 pos = 0;
+	
+	// Set up 3062
+	RSX_CONTEXT_CURRENT_BEGIN(5);
+	RSX_CONTEXT_CURRENTP[pos++] = RSX_METHOD(0x00006300, 4);
+	RSX_CONTEXT_CURRENTP[pos++] = format;
+	RSX_CONTEXT_CURRENTP[pos++] = (4096) | (4096 << 16); // src_pitch | dst_pitch << 16
+	RSX_CONTEXT_CURRENTP[pos++] = 0;
+	RSX_CONTEXT_CURRENTP[pos++] = block_offset;
+	RSX_CONTEXT_CURRENT_END(5);
+	
+	pos = 0;
+	RSX_CONTEXT_CURRENT_BEGIN(4);
+	RSX_CONTEXT_CURRENTP[pos++] = RSX_METHOD(0x0000A304, 3); //nv308A_POINT
+	RSX_CONTEXT_CURRENTP[pos++] = (Y << 16) | X;
+	RSX_CONTEXT_CURRENTP[pos++] = (1 << 16) | Sz;
+	RSX_CONTEXT_CURRENTP[pos++] = (1 << 16) | Sz;
+	RSX_CONTEXT_CURRENT_END(4);
+	
+	pos = 0;
+	RSX_CONTEXT_CURRENT_BEGIN(5);
+	RSX_CONTEXT_CURRENTP[pos++] = RSX_METHOD(0x0000A400, 4); //nv308A_COLOR
+	RSX_CONTEXT_CURRENTP[pos++] = 0xCAFEBABE;
+	RSX_CONTEXT_CURRENTP[pos++] = 0xDEADBEEF;
+	RSX_CONTEXT_CURRENTP[pos++] = 0xABADBABE;
+	RSX_CONTEXT_CURRENTP[pos++] = 0xAABBCCDD;
+	RSX_CONTEXT_CURRENT_END(5);
+	
+	rsxFinish(g_context, 0xA0A0);
+	
+	// write the 1024 words, 16 at a time
+	u32 *data = (u32*)block;
+	int n;
+	for (n = 0; n < 1024; ++n)
+	{
+		if (data[n] != 0)
+		{
+			tty_write("[%d] 0x%x\n", n, data[n]);
+		}
+	}
+}
+
+void do_image_in_test()
+{
+	rsxFlushBuffer(g_context);
+	
+	tty_write(".... Clear ....\n");
+
+	u32  dst_offset;
+	u32* dst = (u32*)rsxMemalign(64, 10240);
+	rsxAddressToOffset(dst, &dst_offset);
+}
+
+void do_test()
+{
+	tty_write("Starting test...\n");
+	
+	// Allocate some memory
+	void* block = rsxMemalign(64, 4096);
+	u32 block_offset = 0;
+	rsxAddressToOffset(block, &block_offset);
+	
+	// Clear
+	flush_queue();
+	
+	// Do transfers
+	tty_write("------------ FORMAT Y32 --------------\n");
+	write_inline(block, block_offset, 16, 0, 4, 11);
+	
+	tty_write("------------ FORMAT ARGB8 --------------\n");
+	write_inline(block, block_offset, 16, 0, 4, 10);
+	
+	tty_write("------------ FORMAT RGB565 --------------\n");
+	write_inline(block, block_offset, 16, 0, 4, 4);
+	
+	tty_write("Test finished\n");
+	g_running = false;
+}
+
 int main(int argc, const char **argv)
 {
 	/*Exit hooks*/
@@ -282,18 +305,13 @@ int main(int argc, const char **argv)
 	
 	/*video init*/
 	video_bringup();
-	
-	g_RTT_format = 10; //G8B8
 	rtt_setup(0, g_RTT_format);
 	
 	while (g_running)
 	{
 		sysUtilCheckCallback();
 		
-		//render_scene();
-		//do_g8b8_test();
-		do_z24s8_test();
-		flip();
+		do_test();
 	}
 	
 	return 0;

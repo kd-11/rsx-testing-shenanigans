@@ -56,6 +56,16 @@ void run_test()
 	do_run(300, baseline);
 	do_run(400, baseline);
 	do_run(500, baseline);
+	
+	printf("Doing the special tests...\n");
+	do_run(250, baseline);
+	do_run(280, baseline);
+	do_run(290, baseline);
+	do_run(299, baseline);
+	do_run(301, baseline);
+	do_run(310, baseline);
+	do_run(320, baseline);
+	do_run(600, baseline);
 }
 
 int main(int argc, char** argv)
